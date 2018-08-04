@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image
 
 
-IMG_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm']
+IMG_EXTENSIONS = ['.jpg', '.JPEG', '.png', '.ppm', '.bmp', '.pgm']
 
 
 class DataSet(object):

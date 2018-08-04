@@ -6,7 +6,7 @@ def leaky_relu(input_, leakiness=0.2):
     return tf.maximum(input_, leakiness * input_)
 
 
-def conv2d(input_, output_dim, kernal=(5, 5), strides=(2, 2), padding='SAME', activate_fn=None, name="conv2d"):
+def conv2d(input_, output_dim, kernal=(5, 5), strides=(2, 2), padding='SAME', activate_fn=None, name="conv2d", initializer=tf.orthogonal_initializer()):
     if type(kernal) == list or type(kernal) == tuple:
         [k_h, k_w] = list(kernal)
     else:
@@ -22,7 +22,7 @@ def conv2d(input_, output_dim, kernal=(5, 5), strides=(2, 2), padding='SAME', ac
             input_ = tf.pad(input_, [[p, p] for p in padding], "CONSTANT")
             padding = 'VALID'
 
-        w = tf.get_variable('w', [k_h, k_w, input_.get_shape()[-1], output_dim], initializer=tf.orthogonal_initializer())
+        w = tf.get_variable('w', [k_h, k_w, input_.get_shape()[-1], output_dim], initializer=initializer)
         conv = tf.nn.conv2d(input_, w, strides=[1, d_h, d_w, 1], padding=padding)
         biases = tf.get_variable('biases', [output_dim], initializer=tf.constant_initializer(0.0))
         conv = tf.nn.bias_add(conv, biases)

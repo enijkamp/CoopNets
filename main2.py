@@ -1,12 +1,12 @@
 import os
 
 os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
-os.environ['CUDA_VISIBLE_DEVICES'] = str(0)
+os.environ['CUDA_VISIBLE_DEVICES'] = str(1)
 
 from datetime import datetime
 import tensorflow as tf
 
-from model.model import CoopNets
+from model.model2 import CoopNets
 from util.io import make_dir, init_log
 
 FLAGS = tf.app.flags.FLAGS
