@@ -223,14 +223,9 @@ class CoopNets(object):
 
     def descriptor(self, inputs):
         with tf.variable_scope('des', reuse=tf.AUTO_REUSE):
-            conv1 = conv2d(inputs, 64, kernal=(5, 5), strides=(2, 2), padding="SAME", activate_fn=leaky_relu,
-                           name="conv1")
-
-            conv2 = conv2d(conv1, 128, kernal=(3, 3), strides=(2, 2), padding="SAME", activate_fn=leaky_relu,
-                           name="conv2")
-
-            conv3 = conv2d(conv2, 256, kernal=(3, 3), strides=(1, 1), padding="SAME", activate_fn=leaky_relu,
-                           name="conv3")
+            conv1 = conv2d(inputs, 64, kernal=(5, 5), strides=(2, 2), padding="SAME", activate_fn=tf.nn.tanh, name="conv1")
+            conv2 = conv2d(conv1, 128, kernal=(3, 3), strides=(2, 2), padding="SAME", activate_fn=tf.nn.tanh, name="conv2")
+            conv3 = conv2d(conv2, 256, kernal=(3, 3), strides=(1, 1), padding="SAME", activate_fn=tf.nn.tanh, name="conv3")
 
             fc = fully_connected(conv3, 100, name="fc")
 
